@@ -1,10 +1,11 @@
 import logging
 
 from environs import Env
-from telegram import Update
+from telegram import Update, Bot
 from telegram.ext import Updater, CallbackContext, CommandHandler, MessageHandler, Filters
 
 from dialogflow_intent import detect_intent
+from logger import TelegramLogHandler
 
 
 env = Env()
@@ -12,13 +13,15 @@ env.read_env()
 TELEGRAM_TOKEN = env('TELEGRAM_TOKEN')
 PROJECT_ID=env('PROJECT_ID')
 GOOGLE_APPLICATION_CREDENTIALS=env('GOOGLE_APPLICATION_CREDENTIALS')
+TELEGRAM_TOKEN_LOGS=env('TELEGRAM_TOKEN_LOGS')
+TG_CHAT_ID=env('TG_CHAT_ID')
 
+logger = logging.getLogger('Logger')
 
 def main():
-    logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
-    )   
-    logger = logging.getLogger(__name__)
+    bot = Bot(token=TELEGRAM_TOKEN_LOGS)
+    logger.setLevel(logging.INFO)
+    logger.addHandler(TelegramLogHandler(bot, TG_CHAT_ID))
 
     updater = Updater(TELEGRAM_TOKEN)
     dispatcher = updater.dispatcher

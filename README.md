@@ -7,6 +7,8 @@ TELEGRAM_TOKEN=<токен телеграм бота>
 PROJECT_ID=<id проекта google cloud>
 GOOGLE_APPLICATION_CREDENTIALS=<путь до файла application_default_credentials>
 VK_API_TOKEN=<токен сообщества vk>
+TELEGRAM_TOKEN_LOGS=<бот для отправки логов>
+TG_CHAT_ID=<идентификатор пользователя телеграма для получения логов>
 ```
 
 ## Токен telegram-бота
