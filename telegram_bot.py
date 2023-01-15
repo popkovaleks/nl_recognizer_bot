@@ -42,6 +42,8 @@ def echo(update: Update, context: CallbackContext):
     # context.bot.send_message(chat_id=update.effective_chat.id, text=update.message.text)
     session_id = update.effective_chat.id
     response_text = detect_intent(PROJECT_ID, session_id, [update.message.text], 'ru')
+    if not response_text:
+        response_text = 'Я не понимаю'
     context.bot.send_message(chat_id=session_id, text=response_text)
 
 if __name__ == '__main__':

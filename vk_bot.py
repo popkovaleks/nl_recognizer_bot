@@ -19,11 +19,12 @@ def echo(event, vk_api):
     user_id = event.user_id
     message = event.text
     response_text = detect_intent(project_id=PROJECT_ID, session_id=user_id, texts=[message], language_code='ru')
-    vk_api.messages.send(
-        user_id=user_id,
-        message=response_text,
-        random_id=random.randint(1,1000)
-    )
+    if response_text:
+        vk_api.messages.send(
+            user_id=user_id,
+            message=response_text,
+            random_id=random.randint(1,1000)
+        )
 
 
 if __name__ == "__main__":
