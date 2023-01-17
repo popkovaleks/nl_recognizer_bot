@@ -43,20 +43,13 @@ def main():
 
     args = parser.parse_args()
     path = args.p
-    print(path)
 
     with open(path, 'r') as file:
         intentions_json = file.read()
 
     intentions = json.loads(intentions_json)
-    print(intentions)
 
     for intention in intentions:
-        print(intention)
-        print('---')
-        print(intentions[intention]['questions'])
-        print(intentions[intention]['answer'])
-        print('='*30)
         create_intent(PROJECT_ID, intention, intentions[intention]['questions'], [intentions[intention]['answer']])
 
 

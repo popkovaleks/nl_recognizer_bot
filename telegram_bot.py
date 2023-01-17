@@ -37,9 +37,7 @@ def main():
 def start(update: Update, context: CallbackContext):
     context.bot.send_message(chat_id=update.effective_chat.id, text='Здравствуйте')
     detect_intent(project_id=PROJECT_ID, session_id=update.effective_chat.id, texts=update.message.text, language_code='ru-RU')
-    print(update)
-    print('------')
-    print(update.effective_chat)
+    
 
 def echo(update: Update, context: CallbackContext):
     # context.bot.send_message(chat_id=update.effective_chat.id, text=update.message.text)
