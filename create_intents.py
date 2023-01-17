@@ -44,8 +44,8 @@ def main():
 
     intentions = json.loads(intentions_json)
 
-    for intention in intentions:
-        create_intent(PROJECT_ID, intention, intentions[intention]['questions'], [intentions[intention]['answer']])
+    for intention_name, intention_data in intentions:
+        create_intent(PROJECT_ID, intention_name, intention_data['questions'], list(intention_data['answer']))
 
 
 if __name__ == '__main__':
@@ -53,5 +53,5 @@ if __name__ == '__main__':
     env.read_env()
     PROJECT_ID=env('PROJECT_ID')
     GOOGLE_APPLICATION_CREDENTIALS=env('GOOGLE_APPLICATION_CREDENTIALS')
-    
+
     main()
