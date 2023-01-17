@@ -4,11 +4,6 @@ import argparse
 from environs import Env
 
 
-env = Env()
-env.read_env()
-PROJECT_ID=env('PROJECT_ID')
-GOOGLE_APPLICATION_CREDENTIALS=env('GOOGLE_APPLICATION_CREDENTIALS')
-
 def create_intent(project_id, display_name, training_phrases_parts, message_texts):
     """Create an intent of the given intent type."""
     from google.cloud import dialogflow
@@ -54,4 +49,9 @@ def main():
 
 
 if __name__ == '__main__':
+    env = Env()
+    env.read_env()
+    PROJECT_ID=env('PROJECT_ID')
+    GOOGLE_APPLICATION_CREDENTIALS=env('GOOGLE_APPLICATION_CREDENTIALS')
+    
     main()
