@@ -19,7 +19,7 @@ def main():
     dispatcher = updater.dispatcher
 
     dispatcher.add_handler(CommandHandler('start', start))
-    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
+    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, response))
 
     updater.start_polling()
     updater.idle()
@@ -31,8 +31,7 @@ def start(update: Update, context: CallbackContext):
     detect_intent(project_id=PROJECT_ID, session_id=update.effective_chat.id, texts=update.message.text, language_code='ru-RU')
     
 
-def echo(update: Update, context: CallbackContext):
-    # context.bot.send_message(chat_id=update.effective_chat.id, text=update.message.text)
+def response(update: Update, context: CallbackContext):
     session_id = update.effective_chat.id
     response_text = detect_intent(PROJECT_ID, session_id, update.message.text, 'ru')
     if not response_text:

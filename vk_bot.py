@@ -10,7 +10,7 @@ from dialogflow_intent import detect_intent
 from logger import TelegramLogHandler
 
 
-def echo(event, vk_api):
+def response(event, vk_api):
     user_id = event.user_id
     message = event.text
     response_text = detect_intent(project_id=PROJECT_ID, session_id=user_id, text=message, language_code='ru')
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     GOOGLE_APPLICATION_CREDENTIALS=env('GOOGLE_APPLICATION_CREDENTIALS')
     TELEGRAM_TOKEN_LOGS=env('TELEGRAM_TOKEN_LOGS')
     TG_CHAT_ID=env('TG_CHAT_ID')
-    
+
     logger = logging.getLogger('Logger')
     bot = Bot(token=TELEGRAM_TOKEN_LOGS)
     logger.setLevel(logging.INFO)
@@ -42,4 +42,4 @@ if __name__ == "__main__":
     longpoll = VkLongPoll(vk_session)
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-            echo(event, vk_api)
+            response(event, vk_api)
