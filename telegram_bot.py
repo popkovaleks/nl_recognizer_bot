@@ -25,11 +25,14 @@ def main():
     updater.idle()
 
 
-
 def start(update: Update, context: CallbackContext):
     context.bot.send_message(chat_id=update.effective_chat.id, text='Здравствуйте')
-    detect_intent(project_id=PROJECT_ID, session_id=update.effective_chat.id, texts=update.message.text, language_code='ru-RU')
-    
+    detect_intent(
+        project_id=PROJECT_ID,
+        session_id=update.effective_chat.id,
+        texts=update.message.text,
+        language_code='ru-RU')
+
 
 def response(update: Update, context: CallbackContext):
     session_id = update.effective_chat.id
@@ -38,13 +41,14 @@ def response(update: Update, context: CallbackContext):
         response_text = 'Я не понимаю'
     context.bot.send_message(chat_id=session_id, text=response_text)
 
+
 if __name__ == '__main__':
     env = Env()
     env.read_env()
     TELEGRAM_TOKEN = env('TELEGRAM_TOKEN')
-    PROJECT_ID=env('PROJECT_ID')
-    GOOGLE_APPLICATION_CREDENTIALS=env('GOOGLE_APPLICATION_CREDENTIALS')
-    TELEGRAM_TOKEN_LOGS=env('TELEGRAM_TOKEN_LOGS')
-    TG_CHAT_ID=env('TG_CHAT_ID')
+    PROJECT_ID = env('PROJECT_ID')
+    GOOGLE_APPLICATION_CREDENTIALS = env('GOOGLE_APPLICATION_CREDENTIALS')
+    TELEGRAM_TOKEN_LOGS = env('TELEGRAM_TOKEN_LOGS')
+    TG_CHAT_ID = env('TG_CHAT_ID')
 
     main()

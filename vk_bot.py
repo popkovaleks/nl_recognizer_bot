@@ -13,12 +13,15 @@ from logger import TelegramLogHandler
 def response(event, vk_api):
     user_id = event.user_id
     message = event.text
-    response_text = detect_intent(project_id=PROJECT_ID, session_id=user_id, text=message, language_code='ru')
+    response_text = detect_intent(project_id=PROJECT_ID,
+                                  session_id=user_id,
+                                  text=message,
+                                  language_code='ru')
     if response_text:
         vk_api.messages.send(
             user_id=user_id,
             message=response_text,
-            random_id=random.randint(1,1000)
+            random_id=random.randint(1, 1000)
         )
 
 
@@ -27,10 +30,10 @@ if __name__ == "__main__":
     env.read_env()
 
     VK_TOKEN = env('VK_API_TOKEN')
-    PROJECT_ID=env('PROJECT_ID')
-    GOOGLE_APPLICATION_CREDENTIALS=env('GOOGLE_APPLICATION_CREDENTIALS')
-    TELEGRAM_TOKEN_LOGS=env('TELEGRAM_TOKEN_LOGS')
-    TG_CHAT_ID=env('TG_CHAT_ID')
+    PROJECT_ID = env('PROJECT_ID')
+    GOOGLE_APPLICATION_CREDENTIALS = env('GOOGLE_APPLICATION_CREDENTIALS')
+    TELEGRAM_TOKEN_LOGS = env('TELEGRAM_TOKEN_LOGS')
+    TG_CHAT_ID = env('TG_CHAT_ID')
 
     logger = logging.getLogger('Logger')
     bot = Bot(token=TELEGRAM_TOKEN_LOGS)
