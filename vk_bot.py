@@ -23,7 +23,7 @@ TG_CHAT_ID=env('TG_CHAT_ID')
 def echo(event, vk_api):
     user_id = event.user_id
     message = event.text
-    response_text = detect_intent(project_id=PROJECT_ID, session_id=user_id, texts=[message], language_code='ru')
+    response_text = detect_intent(project_id=PROJECT_ID, session_id=user_id, text=message, language_code='ru')
     if response_text:
         vk_api.messages.send(
             user_id=user_id,
