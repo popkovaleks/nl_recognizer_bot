@@ -26,3 +26,10 @@ TG_CHAT_ID=<идентификатор пользователя телеграм
 python3 telegram_bot.py
 python3 vk_bot.py
 ```
+
+## Тренировка бота
+Натренировать бота можно с помощью скрипта create_intents.py, который запускается следующей командой
+```
+python3 create_intents.py --p [путь до файла json]
+```
+Пример файла для обучения бота по [ссылке](https://dvmn.org/media/filer_public/a7/db/a7db66c0-1259-4dac-9726-2d1fa9c44f20/questions.json)
