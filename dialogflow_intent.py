@@ -13,6 +13,4 @@ def detect_intent(project_id, session_id, text, language_code):
         request={"session": session, "query_input": query_input}
     )
 
-    response_text = response.query_result.fulfillment_text
-
-    return response_text
+    return response

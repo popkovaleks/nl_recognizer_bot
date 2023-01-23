@@ -13,14 +13,14 @@ from logger import TelegramLogHandler
 def response(event, vk_api):
     user_id = event.user_id
     message = event.text
-    response_text = detect_intent(project_id=PROJECT_ID,
+    response = detect_intent(project_id=PROJECT_ID,
                                   session_id=user_id,
                                   text=message,
                                   language_code='ru')
-    if response_text:
+    if not response.query_result.intent.is_fallback:
         vk_api.messages.send(
             user_id=user_id,
-            message=response_text,
+            message=response.query_result.fulfillment_text,
             random_id=random.randint(1, 1000)
         )
 
