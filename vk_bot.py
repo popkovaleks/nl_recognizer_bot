@@ -10,6 +10,9 @@ from dialogflow_intent import detect_intent
 from logger import TelegramLogHandler
 
 
+logger = logging.getLogger('Logger')
+
+
 def response(event, vk_api):
     user_id = event.user_id
     message = event.text
@@ -35,7 +38,6 @@ if __name__ == "__main__":
     TELEGRAM_TOKEN_LOGS = env('TELEGRAM_TOKEN_LOGS')
     TG_CHAT_ID = env('TG_CHAT_ID')
 
-    logger = logging.getLogger('Logger')
     bot = Bot(token=TELEGRAM_TOKEN_LOGS)
     logger.setLevel(logging.INFO)
     logger.addHandler(TelegramLogHandler(bot, TG_CHAT_ID))

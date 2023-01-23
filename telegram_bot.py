@@ -8,10 +8,13 @@ from dialogflow_intent import detect_intent
 from logger import TelegramLogHandler
 
 
+
+logger = logging.getLogger('Logger')
+
+
 def main():
     bot = Bot(token=TELEGRAM_TOKEN_LOGS)
 
-    logger = logging.getLogger('Logger')
     logger.setLevel(logging.INFO)
     logger.addHandler(TelegramLogHandler(bot, TG_CHAT_ID))
 
