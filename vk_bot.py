@@ -13,7 +13,7 @@ from logger import TelegramLogHandler
 logger = logging.getLogger('Logger')
 
 
-def response(event, vk_api):
+def send_response(event, vk_api, PROJECT_ID):
     user_id = event.user_id
     message = event.text
     response = detect_intent(project_id=PROJECT_ID,
@@ -28,13 +28,12 @@ def response(event, vk_api):
         )
 
 
-if __name__ == "__main__":
+def main():
     env = Env()
     env.read_env()
 
     VK_TOKEN = env('VK_API_TOKEN')
     PROJECT_ID = env('PROJECT_ID')
-    GOOGLE_APPLICATION_CREDENTIALS = env('GOOGLE_APPLICATION_CREDENTIALS')
     TELEGRAM_TOKEN_LOGS = env('TELEGRAM_TOKEN_LOGS')
     TG_CHAT_ID = env('TG_CHAT_ID')
 
@@ -47,4 +46,8 @@ if __name__ == "__main__":
     longpoll = VkLongPoll(vk_session)
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-            response(event, vk_api)
+            send_response(event, vk_api, PROJECT_ID)
+
+
+if __name__ == "__main__":
+    main()
